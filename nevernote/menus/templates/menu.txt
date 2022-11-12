@@ -1,0 +1,5 @@
+{{ menu.verbose_name.title() }}
+
+{% for key, entry in menu -%}
+{{ key }} - {{ entry }}
+{% endfor %}

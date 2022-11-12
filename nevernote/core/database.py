@@ -23,4 +23,4 @@ def load_models():
 
 def create_tables():
     """Crée les tables en base de données."""
-    database.create_table(_registered_models)
+    database.create_tables(_registered_models)

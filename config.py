@@ -1,9 +1,11 @@
 """Configuration de l'application exercice Nevernote."""
+import locale
 
+TERMINAL_ENCODING = locale.getdefaultlocale()[1]
 DATABASE_FILE = "db.sqlite3"
 MODEL_MODULES = [
     "nevernote.notes.models",
     "nevernote.tasks.models",
-    "nevernote.users.models",
     "nevernote.tags.models",
 ]
+TIME_ZONE = "Europe/Paris"

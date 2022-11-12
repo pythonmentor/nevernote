@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 peewee = "*"
+jinja2 = "*"
 
 [dev-packages]
 pytest = "*"

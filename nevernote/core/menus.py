@@ -26,7 +26,7 @@ class MenuChoice:
 
     def __call__(self):
         """Appelle la fonction de traitement associée au choix."""
-        return self.handler()
+        return self.handler
 
 
 class Menu:
@@ -60,10 +60,6 @@ class Menu:
             exécutable.
 
         """
-        if not callable(handler):
-            raise ValueError(
-                f"The handler provided to handle '{choice}' must be callable"
-            )
         if key is None:
             key = str(self._autokey)
             self._autokey += 1
