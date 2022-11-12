@@ -46,7 +46,7 @@ class Menu:
         self._entries = {}
         self._autokey = 1
 
-    def add(self, choice, handler, key=None):
+    def add(self, choice, handler=None, key=None):
         """Ajoute une nouvelle option à proposer à l'utilisateur.
 
         Args:
@@ -76,9 +76,4 @@ class Menu:
 
     def __getitem__(self, key):
         """Accède à l'entrée de menu correspondante à la clé."""
-        return self._entries[key]
-
-    def get(self, key, default_value=None):
-        """Accède à l'entrée de menu correspondante à la clé et retourne une valeur par défaut si cette
-        clé n'existe pas."""
-        return self._entries.get(key, default_value)
+        return self._entries[key].handler

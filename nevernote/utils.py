@@ -12,7 +12,7 @@ def timezone_now():
 def localtime(value=None, timezone=None):
     """Retourne la date et l'heure locale."""
     if value is None:
-        value = now()
+        value = timezone_now()
     if timezone is None:
         timezone = ZoneInfo(config.TIME_ZONE)
 

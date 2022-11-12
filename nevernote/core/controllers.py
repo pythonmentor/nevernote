@@ -1,5 +1,7 @@
 import abc
 
+from .views import SimpleCursesMenuView
+
 
 class Application:
     """Contrôleur frontal de l'application."""
@@ -30,21 +32,24 @@ class AbstractController(abc.ABC):
 class AbstractMenuController(AbstractController):
     """Contrôleur abstrait servant de base pour tous les menus de l'application."""
 
-    @property
+    view_class = SimpleCursesMenuView
+
     @abc.abstractclassmethod
-    def menu(self):
+    def get_menu(self):
         """Menu utilisé pour gérer la saisie utilisateur."""
 
-    @property
-    @abc.abstractclassmethod
-    def view_class(self):
-        """Vue utilisée pour gérer l'affichage du menu et la saisie utilisateur."""
+    def get_view(self, menu):
+        """Construit l'objet responsable de créer la vue."""
+        return self.view_class(self.application, menu)
 
     def __call__(self):
         """Exécution générique pour un contrôler de menu."""
-        view = self.view_class(self.application, self.menu)
-        user_choice = view.render()
-        if user_choice in self.menu:
-            return self.menu.get(user_choice)
+        menu = self.get_menu()
+        view = self.get_view(menu)
+        view.render()
+        user_choice = view.get_user_choice()
+
+        if user_choice in menu:
+            return menu[user_choice]
         else:
             return self

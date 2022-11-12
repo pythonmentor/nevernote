@@ -1,47 +1,50 @@
 from nevernote.core.controllers import (
-    AbstractController,
     AbstractMenuController,
 )
 from nevernote.core.menus import Menu
-
-from .views import HomeView
+from nevernote.core.views import SimpleCursesMenuView
 
 
 class HomeController(AbstractMenuController):
-    """Contrôle le menu d'accueil.
+    """Contrôle le menu d'accueil de l'application."""
 
-    Implémentation utilisant un MenuController générique."""
+    def get_menu(self):
+        """Défini le menu d'accueil"""
+        from nevernote.menus.notebooks.controllers import NotebookController
 
-    menu = (
-        Menu("Accueil")
-        .add("Carnets de notes", None)
-        .add("Toutes les notes", None)
-        .add("Etiquettes", None)
-        .add("Tâches", None)
-        .add("Quitter l'application", None)
-    )
-
-    view_class = HomeView
+        return (
+            Menu("Accueil")
+            .add("Carnets de notes", NotebookController(self.application))
+            .add("Toutes les notes")
+            .add("Etiquettes")
+            .add("Tâches")
+            .add("Quitter l'application")
+        )
 
 
-class FullHomeController(AbstractController):
+class ExempleFullyManualHomeController:
     """Contrôle le menu d'accueil de l'application.
 
-    Implémentation utilisant un Controller générique de base."""
+    Implémentation à la main."""
+
+    def __init__(self, application):
+        self.application = application
+        self.state = application.state
 
     def __call__(self):
         """Exécution du contrôleur."""
         menu = (
             Menu("Accueil")
-            .add("Carnets de notes", None)
-            .add("Toutes les notes", None)
-            .add("Etiquettes", None)
-            .add("Tâches", None)
-            .add("Quitter l'application", None)
+            .add("Carnets de notes")
+            .add("Toutes les notes")
+            .add("Etiquettes")
+            .add("Tâches")
+            .add("Quitter l'application")
         )
 
-        home_view = HomeView(self.application, menu)
-        user_choice = home_view.render()
+        home_view = SimpleCursesMenuView(self.application, menu)
+        home_view.render()
+        user_choice = home_view.get_user_choice()
 
         if user_choice in menu:
             return menu.get(user_choice)

@@ -9,3 +9,6 @@ MODEL_MODULES = [
     "nevernote.tags.models",
 ]
 TIME_ZONE = "Europe/Paris"
+
+DEFAULT_NOTEBOOK_NAME = "Boîte de réception"
+DEFAULT_NOTE_FOR_TASKS = "Choses à faire"

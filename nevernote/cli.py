@@ -1,7 +1,10 @@
 import curses
 
 from nevernote.core.controllers import Application
-from nevernote.menus.home.controllers import HomeController
+from nevernote.menus.home.controllers import (
+    HomeController,
+    ExempleFullyManualHomeController,
+)
 
 
 def application(window):
